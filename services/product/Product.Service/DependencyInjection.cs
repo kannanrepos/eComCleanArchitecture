@@ -13,7 +13,7 @@ public static class DependencyInjection
     // REMARK: If you want to use Controllers, you'll need this.
     services.AddControllers();
 
-    // services.AddExceptionHandler<GlobalExceptionHandler>();
+    services.AddExceptionHandler<GlobalExceptionHandler>();
     services.AddProblemDetails();
 
     return services;
