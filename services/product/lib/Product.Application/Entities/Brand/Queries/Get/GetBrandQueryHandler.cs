@@ -9,10 +9,7 @@ public class GetBrandQueryHandler(IBrandRepository brandRepository, IMapper mapp
 {
   public async Task<Result<List<BrandResponse>>> Handle(GetBrandQuery query, CancellationToken cancellationToken)
   {
-    // if (query.UserId != userContext.UserId)
-    // {
-    //   return Result.Failure<List<TodoResponse>>(UserErrors.Unauthorized());
-    // }
+
     var data = await brandRepository.GetAllAsync(cancellationToken);
     return mapper.Map<List<BrandResponse>>(data);
   }

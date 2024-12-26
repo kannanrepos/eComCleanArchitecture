@@ -2,5 +2,5 @@ using Product.Application.Abstractions.Messaging;
 
 namespace Product.Application.Entities.Brand.Queries.Get;
 
-public sealed record GetBrandQuery(Guid BrandId) : IQuery<List<BrandResponse>>;
+public sealed record GetBrandQuery() : IQuery<List<BrandResponse>>;
 

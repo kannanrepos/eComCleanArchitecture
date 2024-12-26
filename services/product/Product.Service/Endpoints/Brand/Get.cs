@@ -8,15 +8,15 @@ using Product.Service.Infrastructure;
 
 namespace Product.Service.Endpoints.Brand;
 
-public class GetByBrandId : IEndpoint
+public class Get : IEndpoint
 {
   public void MapEndpoint(IEndpointRouteBuilder app)
   {
-    app.MapGet("brands/{id:guid}", async (Guid brandId, ISender sender, CancellationToken cancellationToken) =>
+    app.MapGet("brands", async (ISender sender, CancellationToken cancellationToken) =>
    {
-     var command = new GetBrandByIdQuery(brandId);
+     var command = new GetBrandQuery();
 
-     Result<BrandResponse> result = await sender.Send(command, cancellationToken);
+     Result<List<BrandResponse>> result = await sender.Send(command, cancellationToken);
 
      return result.Match(Results.Ok, CustomResults.Problem);
    })
