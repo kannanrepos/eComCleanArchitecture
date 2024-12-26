@@ -1,0 +1,18 @@
+x-postgres-common: &postgres-common
+  image: postgres:15-alpine
+  restart: always
+  healthcheck:
+    test: 'pg_isready -U user --dbname=postgres'
+    interval: 10s
+    timeout: 5s
+    retries: 5
+services:
+  postgres_primary:
+    <<: *postgres-common
+    container_name: postgres_primary
+  postgres_replica:
+    <<: *postgres-common
+    container_name: postgres_replica
+  redis_cache:
+    image: redis:alpine
+    container_name: "redis_cache"
