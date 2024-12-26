@@ -12,7 +12,7 @@ public class GetByBrandId : IEndpoint
 {
   public void MapEndpoint(IEndpointRouteBuilder app)
   {
-    app.MapGet("brands/{id:guid}", async (Guid brandId, ISender sender, CancellationToken cancellationToken) =>
+    app.MapGet("brands/{brandId:guid}", async (Guid brandId, ISender sender, CancellationToken cancellationToken) =>
    {
      var command = new GetBrandByIdQuery(brandId);
 

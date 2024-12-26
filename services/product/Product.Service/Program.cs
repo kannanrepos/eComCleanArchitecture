@@ -8,6 +8,7 @@ using Product.Infrastructure;
 using Product.Persistence;
 using Product.Service.Extensions;
 using Product.Service;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
@@ -25,6 +26,19 @@ app.MapEndpoints();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.UseSwaggerUI(option =>
+    {
+        option.SwaggerEndpoint("/openapi/v1.json", "Product Service");
+    });
+    app.MapScalarApiReference(options =>
+    {
+        options
+        .WithTitle("Product Service")
+        .WithTheme(ScalarTheme.Purple)
+        .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.RestSharp)
+        ;
+
+    });
     // app.ApplyMigrations();
 }
 app.MapHealthChecks("health", new HealthCheckOptions
