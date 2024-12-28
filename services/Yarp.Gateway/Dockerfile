@@ -6,7 +6,7 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /gateway
-COPY ["gateway/Yarp.Gateway/Yarp.Gateway.csproj", "gateway/Yarp.Gateway/"]
+COPY ["Yarp.Gateway/Yarp.Gateway.csproj", "gateway/Yarp.Gateway/"]
 
 RUN dotnet restore "./gateway/Yarp.Gateway/Yarp.Gateway.csproj"
 

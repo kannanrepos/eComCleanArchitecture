@@ -37,6 +37,6 @@ services:
     container_name: gateway-service
     build:
       context: .
-      dockerfile: gateway/Yarp.Gateway/Dockerfile
+      dockerfile: Yarp.Gateway/Dockerfile
     ports:
       - 5000:8081
