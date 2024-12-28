@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -41,8 +42,7 @@ namespace Product.Persistence.Data.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     name = table.Column<string>(type: "text", nullable: false),
                     description = table.Column<string>(type: "text", nullable: false),
-                    parent_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    category_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    parent_id = table.Column<Guid>(type: "uuid", nullable: true),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     created_by = table.Column<Guid>(type: "uuid", nullable: false),
                     modified_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -53,18 +53,12 @@ namespace Product.Persistence.Data.Migrations
                 {
                     table.PrimaryKey("pk_categories", x => x.id);
                     table.ForeignKey(
-                        name: "fk_categories_categories_category_id",
-                        column: x => x.category_id,
-                        principalSchema: "public",
-                        principalTable: "categories",
-                        principalColumn: "id");
-                    table.ForeignKey(
                         name: "fk_categories_categories_parent_id",
                         column: x => x.parent_id,
                         principalSchema: "public",
                         principalTable: "categories",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -80,10 +74,10 @@ namespace Product.Persistence.Data.Migrations
                     stock = table.Column<int>(type: "integer", nullable: false),
                     rating = table.Column<int>(type: "integer", nullable: false),
                     low_stock_threshold = table.Column<int>(type: "integer", nullable: false),
-                    category_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    brand_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    brand_id1 = table.Column<Guid>(type: "uuid", nullable: true),
-                    category_id1 = table.Column<Guid>(type: "uuid", nullable: true),
+                    product_icon_image_url = table.Column<List<string>>(type: "text[]", nullable: false),
+                    product_images_url = table.Column<List<string>>(type: "text[]", nullable: false),
+                    category_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    brand_id = table.Column<Guid>(type: "uuid", nullable: true),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     created_by = table.Column<Guid>(type: "uuid", nullable: false),
                     modified_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -99,38 +93,27 @@ namespace Product.Persistence.Data.Migrations
                         principalSchema: "public",
                         principalTable: "brands",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_products_brands_brand_id1",
-                        column: x => x.brand_id1,
-                        principalSchema: "public",
-                        principalTable: "brands",
-                        principalColumn: "id");
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "fk_products_categories_category_id",
                         column: x => x.category_id,
                         principalSchema: "public",
                         principalTable: "categories",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_products_categories_category_id1",
-                        column: x => x.category_id1,
-                        principalSchema: "public",
-                        principalTable: "categories",
-                        principalColumn: "id");
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
-                name: "product_attributes",
+                name: "products_product_attributes",
                 schema: "public",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     name = table.Column<string>(type: "text", nullable: false),
                     value = table.Column<string>(type: "text", nullable: false),
+                    product_images_url = table.Column<List<string>>(type: "text[]", nullable: false),
+                    parent_product_attribute_id = table.Column<Guid>(type: "uuid", nullable: true),
                     product_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    products_id = table.Column<Guid>(type: "uuid", nullable: true),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     created_by = table.Column<Guid>(type: "uuid", nullable: false),
                     modified_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -139,31 +122,26 @@ namespace Product.Persistence.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_product_attributes", x => x.id);
+                    table.PrimaryKey("pk_products_product_attributes", x => x.id);
                     table.ForeignKey(
-                        name: "fk_product_attributes_products_product_id",
+                        name: "fk_products_product_attributes_products_product_id",
                         column: x => x.product_id,
                         principalSchema: "public",
                         principalTable: "products",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_product_attributes_products_products_id",
-                        column: x => x.products_id,
-                        principalSchema: "public",
-                        principalTable: "products",
-                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "product_images",
+                name: "product_attribute",
                 schema: "public",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    image_url = table.Column<string>(type: "text", nullable: false),
-                    product_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    products_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    name = table.Column<string>(type: "text", nullable: false),
+                    value = table.Column<string>(type: "text", nullable: false),
+                    product_images_url = table.Column<List<string>>(type: "text[]", nullable: false),
+                    parent_product_attribute_id = table.Column<Guid>(type: "uuid", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     created_by = table.Column<Guid>(type: "uuid", nullable: false),
                     modified_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -172,27 +150,15 @@ namespace Product.Persistence.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_product_images", x => x.id);
+                    table.PrimaryKey("pk_product_attribute", x => x.id);
                     table.ForeignKey(
-                        name: "fk_product_images_products_product_id",
-                        column: x => x.product_id,
+                        name: "fk_product_attribute_products_product_attributes_parent_produc",
+                        column: x => x.parent_product_attribute_id,
                         principalSchema: "public",
-                        principalTable: "products",
+                        principalTable: "products_product_attributes",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_product_images_products_products_id",
-                        column: x => x.products_id,
-                        principalSchema: "public",
-                        principalTable: "products",
-                        principalColumn: "id");
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "ix_categories_category_id",
-                schema: "public",
-                table: "categories",
-                column: "category_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_categories_parent_id",
@@ -201,28 +167,10 @@ namespace Product.Persistence.Data.Migrations
                 column: "parent_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_product_attributes_product_id",
+                name: "ix_product_attribute_parent_product_attribute_id",
                 schema: "public",
-                table: "product_attributes",
-                column: "product_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_product_attributes_products_id",
-                schema: "public",
-                table: "product_attributes",
-                column: "products_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_product_images_product_id",
-                schema: "public",
-                table: "product_images",
-                column: "product_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_product_images_products_id",
-                schema: "public",
-                table: "product_images",
-                column: "products_id");
+                table: "product_attribute",
+                column: "parent_product_attribute_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_products_brand_id",
@@ -231,22 +179,10 @@ namespace Product.Persistence.Data.Migrations
                 column: "brand_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_products_brand_id1",
-                schema: "public",
-                table: "products",
-                column: "brand_id1");
-
-            migrationBuilder.CreateIndex(
                 name: "ix_products_category_id",
                 schema: "public",
                 table: "products",
                 column: "category_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_products_category_id1",
-                schema: "public",
-                table: "products",
-                column: "category_id1");
 
             migrationBuilder.CreateIndex(
                 name: "ix_products_sku",
@@ -254,17 +190,23 @@ namespace Product.Persistence.Data.Migrations
                 table: "products",
                 column: "sku",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "ix_products_product_attributes_product_id",
+                schema: "public",
+                table: "products_product_attributes",
+                column: "product_id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "product_attributes",
+                name: "product_attribute",
                 schema: "public");
 
             migrationBuilder.DropTable(
-                name: "product_images",
+                name: "products_product_attributes",
                 schema: "public");
 
             migrationBuilder.DropTable(

@@ -8,19 +8,12 @@ public class UnitOfWork(
   ApplicationDbContext dbContext,
   IBrandRepository brandRepository,
   ICategoryRepository categoryRepository,
-  IProductAttributeRepository productAttributeRepository,
-  IProductImageRepository productImageRepository,
   IProductRepository productRepository
   ) : IUnitOfWork
 {
   public IBrandRepository Brands => brandRepository;
 
   public ICategoryRepository Categories => categoryRepository;
-
-  public IProductAttributeRepository ProductAttributes => productAttributeRepository;
-
-  public IProductImageRepository ProductImages => productImageRepository;
-
   public IProductRepository Products => productRepository;
   public void Dispose()
   {

@@ -50,7 +50,6 @@ app.UseRequestContextLogging();
 
 app.UseSerilogRequestLogging();
 app.UseExceptionHandler();
-app.MapControllers();
 
 await app.RunAsync();
 

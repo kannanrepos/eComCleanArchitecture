@@ -12,11 +12,10 @@ public class ApplicationDbContext(DbContextOptions options) : DbContext(options)
 {
   public required DbSet<Brand> Brands { get; set; }
   public required DbSet<Category> Categories { get; set; }
-  public required DbSet<ProductAttribute> ProductAttributes { get; set; }
-  public required DbSet<ProductImage> ProductImages { get; set; }
   public required DbSet<Products> Products { get; set; }
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
+    base.OnModelCreating(modelBuilder);
     modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
     modelBuilder.HasDefaultSchema(Schemas.Default);
