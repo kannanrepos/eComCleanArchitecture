@@ -7,8 +7,6 @@ services:
       - "5341:5341"
     volumes:
       - seq-logs:/data
-    environment:
-      SEQ_ADDRESS: "http://seq:5341"
     restart: unless-stopped
   postgres_primary:
     environment:
@@ -39,6 +37,35 @@ services:
       - "6379:6379"
     volumes:
       - redis_data:/data
+
+
+
+  product-service:
+    depends_on:
+      - postgres_primary
+      - postgres_replica
+      - redis_cache
+      - seq
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - "8080"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  gateway-service:
+    depends_on:
+      - product-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8081
+    ports:
+      - "8081"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
 volumes:
   redis_data:
   seq-logs:

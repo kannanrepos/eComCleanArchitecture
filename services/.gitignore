@@ -5,6 +5,7 @@
 
 # dotenv files
 .env
+product/Product.Service/public/products/images/*.jpeg
 *.Development.json
 # User-specific files
 *.rsuser

@@ -39,7 +39,7 @@ if (app.Environment.IsDevelopment())
         ;
 
     });
-    // app.ApplyMigrations();
+    app.ApplyMigrations();
 }
 app.MapHealthChecks("health", new HealthCheckOptions
 {

@@ -1,6 +1,7 @@
+
 x-postgres-common: &postgres-common
   image: postgres:15-alpine
-  restart: always
+  restart: unless-stopped
   healthcheck:
     test: 'pg_isready -U user --dbname=postgres'
     interval: 10s
@@ -20,3 +21,22 @@ services:
   redis_cache:
     image: redis:alpine
     container_name: "redis_cache"
+
+
+
+  product-service:
+    image: ${DOCKER_REGISTRY-}service
+    container_name: product-service
+    build:
+      context: .
+      dockerfile: product/Product.Service/Dockerfile
+    ports:
+      - 5001:8080
+  gateway-service:
+    image: ${DOCKER_REGISTRY-}service
+    container_name: gateway-service
+    build:
+      context: .
+      dockerfile: gateway/Yarp.Gateway/Dockerfile
+    ports:
+      - 5000:8081

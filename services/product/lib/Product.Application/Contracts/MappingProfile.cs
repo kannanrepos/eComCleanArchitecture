@@ -1,4 +1,3 @@
-using System;
 using AutoMapper;
 using Product.Application.Entities.Brand.Commands.Create;
 using Product.Application.Entities.Brand.Queries;
@@ -20,5 +19,7 @@ public class MappingProfile : Profile
     CreateMap<Category, CategoryResponse>();
     CreateMap<CreateProductCommand, Products>();
     CreateMap<Products, ProductResponse>();
+    CreateMap<ProductImage, Domain.ValueObjects.ProductImage>().ReverseMap();
+    CreateMap<ProductAttribute, Domain.ValueObjects.ProductAttribute>().ReverseMap();
   }
 }

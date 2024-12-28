@@ -16,5 +16,5 @@ public class ProductAttribute : BaseEntity
   public ProductAttribute? ParentProductAttribute { get; set; }  // Navigation property
 
   // Child ProductAttributes
-  public List<ProductAttribute> ChildProductAttributes { get; set; } = new();
+  public List<ProductAttribute> ChildProductAttributes { get; set; } = [];
 }
