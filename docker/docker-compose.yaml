@@ -7,6 +7,10 @@ x-postgres-common: &postgres-common
     timeout: 5s
     retries: 5
 services:
+  seq:
+    image: datalust/seq:latest
+    container_name: seq
+    restart: unless-stopped
   postgres_primary:
     <<: *postgres-common
     container_name: postgres_primary
