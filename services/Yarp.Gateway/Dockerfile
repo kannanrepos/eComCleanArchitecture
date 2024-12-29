@@ -1,26 +1,25 @@
-FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
-USER app
-WORKDIR /app
-EXPOSE 8081
-
+# Stage 1: Build Stage
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
-ARG BUILD_CONFIGURATION=Release
-WORKDIR /gateway
-COPY ["Yarp.Gateway/Yarp.Gateway.csproj", "gateway/Yarp.Gateway/"]
+WORKDIR /src
 
-RUN dotnet restore "./gateway/Yarp.Gateway/Yarp.Gateway.csproj"
+# Install required dependencies for native AOT compilation
+RUN apt-get update && apt-get install -y \
+    clang \
+    zlib1g-dev
+
+COPY ["Yarp.Gateway/Yarp.Gateway.csproj", "Yarp.Gateway/"]
+RUN dotnet restore "Yarp.Gateway/Yarp.Gateway.csproj"
 
 COPY . .
-WORKDIR "/gateway/gateway/Yarp.Gateway"
+RUN dotnet build "Yarp.Gateway/Yarp.Gateway.csproj" -c Release -o /app/service/gateway/build
 
-RUN dotnet build "./Yarp.Gateway.csproj" -c $BUILD_CONFIGURATION -o /app/build
-
+# Stage 2: Publish Stage
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Yarp.Gateway.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Yarp.Gateway/Yarp.Gateway.csproj" -c Release -o /app/service/gateway/publish
 
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
+# Stage 3: Runtime Stage
+FROM mcr.microsoft.com/dotnet/aspnet:9.0
+WORKDIR /app/service/gateway/
+EXPOSE 8080
+COPY --from=publish /app/service/gateway/publish .
 ENTRYPOINT ["dotnet", "Yarp.Gateway.dll"]
-

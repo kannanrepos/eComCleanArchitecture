@@ -9,7 +9,7 @@ using Product.Persistence;
 using Product.Service.Extensions;
 using Product.Service;
 using Scalar.AspNetCore;
-
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
 builder.Services.AddOpenApi();
@@ -17,7 +17,7 @@ builder.Services
     .AddPersistence(builder.Configuration)
     .AddInfrastructure(builder.Configuration)
     .AddApplication()
-    .AddPresentation();
+    .AddPresentation(builder.Configuration);
 
 builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
 
@@ -50,11 +50,11 @@ app.UseRequestContextLogging();
 
 app.UseSerilogRequestLogging();
 app.UseExceptionHandler();
-
+app.UseCors(MyAllowSpecificOrigins);
 await app.RunAsync();
 
 // REMARK: Required for functional and integration tests to work.
-namespace Web.Api
+namespace product.service
 {
     public partial class Program;
 }

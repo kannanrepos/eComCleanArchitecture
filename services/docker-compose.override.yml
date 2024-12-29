@@ -39,13 +39,9 @@ services:
       - redis_data:/data
 
 
-
-  product-service:
+  gateway-service:
     depends_on:
-      - postgres_primary
-      - postgres_replica
-      - redis_cache
-      - seq
+      - product-service
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
@@ -55,9 +51,12 @@ services:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
 
-  gateway-service:
+  product-service:
     depends_on:
-      - product-service
+      - postgres_primary
+      - postgres_replica
+      - redis_cache
+      - seq
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8081
@@ -66,6 +65,8 @@ services:
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+
 volumes:
   redis_data:
   seq-logs:
