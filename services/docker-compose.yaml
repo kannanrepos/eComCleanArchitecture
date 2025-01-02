@@ -23,18 +23,18 @@ services:
     container_name: "redis_cache"
 
 
-  gateway-service:
+  gateway_service:
     image: ${DOCKER_REGISTRY-}service
-    container_name: gateway-service
+    container_name: gateway_service
     build:
       context: .
       dockerfile: Yarp.Gateway/Dockerfile
     ports:
       - 5000:8080
 
-  product-service:
+  product_service:
     image: ${DOCKER_REGISTRY-}service
-    container_name: product-service
+    container_name: product_service
     build:
       context: .
       dockerfile: product/Product.Service/Dockerfile

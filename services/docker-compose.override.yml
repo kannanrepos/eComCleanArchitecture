@@ -1,5 +1,7 @@
 services:
   seq:
+    networks:
+      - default
     environment:
       - ACCEPT_EULA=Y
     ports:
@@ -9,6 +11,8 @@ services:
       - seq-logs:/data
     restart: unless-stopped
   postgres_primary:
+    networks:
+      - default
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: P@55w0rd!
@@ -16,6 +20,8 @@ services:
     ports:
       - '5432:5432'
   postgres_replica:
+    networks:
+      - default
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: P@55w0rd!
@@ -33,15 +39,17 @@ services:
                -c archive_mode=on
                -c archive_command='test ! -f /var/lib/postgresql/data/archive/%f && cp %p /var/lib/postgresql/data/archive/%f'
   redis_cache:
+    networks:
+      - default
     ports:
       - "6379:6379"
     volumes:
       - redis_data:/data
 
 
-  gateway-service:
-    depends_on:
-      - product-service
+  gateway_service:
+    networks:
+      - default
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
@@ -51,12 +59,9 @@ services:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
 
-  product-service:
-    depends_on:
-      - postgres_primary
-      - postgres_replica
-      - redis_cache
-      - seq
+  product_service:
+    networks:
+      - default
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8081
@@ -70,4 +75,7 @@ services:
 volumes:
   redis_data:
   seq-logs:
+networks:
+  default:
+    driver: bridge
 

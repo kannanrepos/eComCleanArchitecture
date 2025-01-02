@@ -135,8 +135,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecom.Shared", "shared\Ecom.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yarp.Gateway", "Yarp.Gateway\Yarp.Gateway.csproj", "{C21DFF1E-CA53-4331-B22A-D6A29EA1F8F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway", "Gateway\Gateway.csproj", "{BC967CE3-612C-4240-8784-8C6E9354781D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -331,10 +329,6 @@ Global
 		{C21DFF1E-CA53-4331-B22A-D6A29EA1F8F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C21DFF1E-CA53-4331-B22A-D6A29EA1F8F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C21DFF1E-CA53-4331-B22A-D6A29EA1F8F7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BC967CE3-612C-4240-8784-8C6E9354781D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BC967CE3-612C-4240-8784-8C6E9354781D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BC967CE3-612C-4240-8784-8C6E9354781D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BC967CE3-612C-4240-8784-8C6E9354781D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
