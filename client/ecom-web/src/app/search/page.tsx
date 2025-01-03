@@ -64,7 +64,7 @@ const SearchPage = () => {
                   Showing 1-10 of 100
                 </span>
                 <div className="flex items-center">
-                  Sort by:{' '}
+                  Sort by:
                   <Select defaultValue="most-popular">
                     <SelectTrigger className="font-medium text-sm px-1.5 sm:text-base w-fit text-black bg-transparent shadow-none border-none">
                       <SelectValue />

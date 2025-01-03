@@ -1,5 +1,55 @@
 import { FilterData } from '@/components/ui/checkbox-list';
-
+import { Product } from '../types/product.types';
+export const CartDataItem: Product[] = [
+  {
+    id: 1,
+    title: 'T-shirt with Tape Details',
+    srcUrl: '/images/pic1.png',
+    gallery: ['/images/pic1.png', '/images/pic10.png', '/images/pic11.png'],
+    price: 120,
+    discount: {
+      amount: 0,
+      percentage: 0,
+    },
+    rating: 4.5,
+  },
+  {
+    id: 2,
+    title: 'Skinny Fit Jeans',
+    srcUrl: '/images/pic2.png',
+    gallery: ['/images/pic2.png'],
+    price: 260,
+    discount: {
+      amount: 0,
+      percentage: 20,
+    },
+    rating: 3.5,
+  },
+  {
+    id: 3,
+    title: 'Chechered Shirt',
+    srcUrl: '/images/pic3.png',
+    gallery: ['/images/pic3.png'],
+    price: 180,
+    discount: {
+      amount: 0,
+      percentage: 0,
+    },
+    rating: 4.5,
+  },
+  {
+    id: 4,
+    title: 'Sleeve Striped T-shirt',
+    srcUrl: '/images/pic4.png',
+    gallery: ['/images/pic4.png', '/images/pic10.png', '/images/pic11.png'],
+    price: 160,
+    discount: {
+      amount: 0,
+      percentage: 30,
+    },
+    rating: 4.5,
+  },
+];
 export const CategoryFilterData: FilterData[] = [
   {
     id: '1',
