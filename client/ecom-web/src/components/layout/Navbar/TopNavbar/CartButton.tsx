@@ -6,12 +6,12 @@ const CartButton = () => {
   return (
     <Link
       href="/cart"
-      className="relative p-1 w-5 h-5 min-w-5 min-h-5 text-black/40 cursor-pointer hover:text-primary"
+      className="relative p-1 w-5 h-5 min-w-5 min-h-5 text-primary-foreground cursor-pointer hover:scale-105 transition-all duration-300"
     >
       <ShoppingCart />
       <Badge
         variant={'secondary'}
-        className="absolute -top-4 -right-5 rounded-full hover:text-primary-foreground hover:bg-primary"
+        className="absolute -top-4 -right-4 lg:-right-5 rounded-full text-primary-foreground "
       >
         10
       </Badge>

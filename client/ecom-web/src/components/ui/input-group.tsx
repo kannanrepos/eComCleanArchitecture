@@ -4,9 +4,11 @@ import React, { InputHTMLAttributes } from 'react';
 type InputGroupProps = {
   className?: string;
   children: React.ReactNode;
+  onSubmit?: () => void;
 };
-
-type InputTextProps = InputHTMLAttributes<HTMLInputElement>;
+type InputTextProps = InputHTMLAttributes<HTMLInputElement> & {
+  onSubmit?: () => void;
+};
 
 const InputGroup = ({ className, children }: InputGroupProps) => {
   return (
@@ -24,9 +26,20 @@ const InputGroup = ({ className, children }: InputGroupProps) => {
 const Input = React.forwardRef<HTMLInputElement, InputTextProps>(
   (props: InputTextProps, ref: React.Ref<HTMLInputElement>) => {
     const { className, ...rest } = props;
-
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Enter' && props.onSubmit) {
+        props.onSubmit();
+      }
+    };
+    const onHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (props.onChange) {
+        props.onChange(e);
+      }
+    };
     return (
       <input
+        onChange={onHandleChange}
+        onKeyDown={handleKeyDown}
         className={cn(
           'input-control w-full py-3 pr-4 outline-none placeholder:font-normal placeholder:text-sm',
           className ?? ''

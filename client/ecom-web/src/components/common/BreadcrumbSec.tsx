@@ -3,27 +3,34 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  BreadcrumbList,
   BreadcrumbPage,
+  BreadcrumbSeparator,
 } from '../ui/breadcrumb';
+import { BredcumProp } from '@/types/breadcrumb.type';
+import { Fragment } from 'react';
 type BreadcrumbSecProp = {
   data: BredcumProp[];
 };
 const BreadcrumbSec = ({ data }: BreadcrumbSecProp) => {
   return (
-    <Breadcrumb className="my-2 sm:my-5">
-      <BreadcrumbLink>
+    <Breadcrumb>
+      <BreadcrumbList>
         {data.map((bredcam, index) => (
-          <BreadcrumbItem key={index}>
-            {bredcam.link ? (
-              <BreadcrumbLink asChild>
-                <Link href={bredcam.link}>{bredcam.label}</Link>
-              </BreadcrumbLink>
-            ) : (
-              <BreadcrumbPage>{bredcam.label}</BreadcrumbPage>
-            )}
-          </BreadcrumbItem>
+          <Fragment key={bredcam.id}>
+            <BreadcrumbItem>
+              {bredcam.url ? (
+                <BreadcrumbLink asChild>
+                  <Link href={bredcam.url}>{bredcam.title}</Link>
+                </BreadcrumbLink>
+              ) : (
+                <BreadcrumbPage>{bredcam.title}</BreadcrumbPage>
+              )}
+            </BreadcrumbItem>
+            <>{index == data.length - 1 ? null : <BreadcrumbSeparator />}</>
+          </Fragment>
         ))}
-      </BreadcrumbLink>
+      </BreadcrumbList>
     </Breadcrumb>
   );
 };

@@ -8,6 +8,7 @@ import Footer from '@/components/layout/Footer';
 import { merriweather } from '@/styles/fonts';
 import '@/styles/globals.css';
 import Providers from './providers';
+import { cn } from '../lib/utils';
 
 export const metadata: Metadata = {
   title: 'Microservice Ecommerce',
@@ -23,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={merriweather.className}>
+      <body className={cn([merriweather.className, 'bg-background'])}>
         <HolyLoader color="#868686" />
         <TopBanner />
         <Providers>

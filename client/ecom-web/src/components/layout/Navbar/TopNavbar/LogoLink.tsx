@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import Image from 'next/image';
 
 import { parkinsansCF } from '@/styles/fonts';
 import { cn } from '@/lib/utils';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 type Props = {
   imgHight?: number;
   imgWidth?: number;
@@ -11,40 +11,35 @@ type Props = {
   imgClassName?: string;
   showSubText?: boolean;
 };
-const LogoLink = ({
-  imgHight,
-  imgWidth,
-  TextClassName,
-  SubClassName,
-  showSubText,
-  imgClassName,
-}: Props) => {
-  showSubText = showSubText ?? true;
+const LogoLink = ({ TextClassName, imgClassName }: Props) => {
   return (
     <>
       <Link href="/" className={cn([parkinsansCF.className, 'text-2xl'])}>
         <div className="flex gap-3">
-          <Image
-            src={'/images/logo.png'}
-            width={imgHight ?? 50}
-            height={imgWidth ?? 25}
-            alt="logo"
-            className={cn([imgClassName])}
-          />
-          <div className="flex flex-col items-center justify-center">
-            <p className={TextClassName ?? 'text-4xl'}>ZentroCart</p>
-            {showSubText && (
+          <Avatar
+            className={cn([
+              imgClassName,
+              'bg-transparent lg:bg-primary-foreground p-1',
+            ])}
+          >
+            <AvatarImage src={'/images/logo.png'} />
+            <AvatarFallback>ZC</AvatarFallback>
+          </Avatar>
+
+          <div className="flex flex-col items-center justify-center  lg:text-primary-foreground">
+            <p className={TextClassName ?? 'text-2xl'}>ZentroCart</p>
+            {/* {showSubText && (
               <p
                 className={cn(
                   [
                     'text-gray-400 dark:text-gray-200 tracking-widest font-parkinsansCF',
                   ],
-                  SubClassName ?? 'text-[10px]'
+                  SubClassName ?? 'text-[5px]'
                 )}
               >
                 Centralize Your Shopping Experience
               </p>
-            )}
+            )} */}
           </div>
         </div>
       </Link>

@@ -24,7 +24,7 @@ const MobileMenubar = ({ data }: Props) => {
       <SheetTrigger asChild className="cursor-pointer">
         <Button
           variant={'ghost'}
-          className="hover:bg-primary text-gray-700 hover:text-primary-foreground"
+          className="hover:bg-primary text-primary-foreground hover:scale-110 "
         >
           <MenuIcon />
         </Button>

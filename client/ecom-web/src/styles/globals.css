@@ -9,7 +9,7 @@ body {
 @layer base {
   :root {
     --smokewhite: #0 0% 94%;
-    --background: 0 0% 100%;
+    --background: 216 22% 95%;
     --foreground: 20 14.3% 4.1%;
     --card: 0 0% 100%;
     --card-foreground: 20 14.3% 4.1%;
@@ -17,7 +17,7 @@ body {
     --popover-foreground: 20 14.3% 4.1%;
     /* --primary: 343 85% 49%; */
     --primary: 12 100% 49%;
-    --primary-foreground: 60 9.1% 97.8%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 83 95% 36%;
     --secondary-foreground: 24 9.8% 10%;
     --muted: 60 4.8% 95.9%;
