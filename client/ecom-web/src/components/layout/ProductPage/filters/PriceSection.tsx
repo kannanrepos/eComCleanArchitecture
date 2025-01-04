@@ -1,5 +1,5 @@
-import FilterSection from './FilterSection';
 import { DualRangeSlider } from '@/components/ui/dual-range-slider';
+import FilterSection from './FilterSection';
 
 const PriceSection = () => {
   return (

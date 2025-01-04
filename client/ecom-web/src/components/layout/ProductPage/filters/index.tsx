@@ -1,19 +1,21 @@
 'use client';
+import { useState } from 'react';
+
 import {
   BrandFilterData,
   CategoryFilterData,
   GenderFilterData,
   RatingFilterData,
 } from '@/lib/data';
-import { FilterData } from '../../../ui/checkbox-list';
-import { Separator } from '../../../ui/separator';
+import { FilterData } from '@/components/ui/checkbox-list';
+import { Separator } from '@/components/ui/separator';
+
 import BrandSection from './BrandSection';
 import CategorySection from './CategorySection';
 import ColorsSection from './ColorsSection';
 import GenderSection from './GenderSection';
 import PriceSection from './PriceSection';
 import RatingSection from './RatingSection';
-import { useState } from 'react';
 
 const Filters = () => {
   const [filteredBrands, setFilteredBrands] = useState<FilterData[]>([]);

@@ -12,12 +12,14 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import ProductCard from '@/components/common/ProductCard';
+import Filters from '@/components/layout/ProductPage/filters';
+import MobileFilters from '@/components/layout/ProductPage/filters/MobileFilters';
+
 import {
   newArrivalsData,
   relatedProductData,
   topSellingData,
 } from '@/lib/utils';
-import Filters from '@/components/layout/ProductPage/filters';
 import { SearchPageBreadCrumbData } from '@/lib/data';
 
 const SearchPage = () => {
@@ -30,7 +32,7 @@ const SearchPage = () => {
 
   return (
     <main>
-      <div className="container mx-auto px-4 my-3 xl:px-0">
+      <div className="md:container mx-auto px-4 my-3 xl:px-0">
         <div className="flex md:space-x-5 items-start">
           <div className="hidden md:block min-w-[295px] max-w-[295px] bg-primary-foreground rounded-sm px-5 md:px-6 py-5 space-y-5 md:space-y-6">
             <div className="flex items-center justify-between">
@@ -46,7 +48,7 @@ const SearchPage = () => {
                 <h1 className="font-bold text-2xl md:text-[32px]">
                   results for &quot;{searchText}&quot;
                 </h1>
-                {/* <MobileFilter/> */}
+                <MobileFilters />
               </div>
               <div className="flex flex-col sm:items-center sm:flex-row">
                 <span className="text-sm md:text-base text-black/60 mr-3">

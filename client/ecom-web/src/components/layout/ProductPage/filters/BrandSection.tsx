@@ -1,6 +1,5 @@
-import React from 'react';
-import FilterSection from './FilterSection';
 import CheckboxList, { FilterData } from '@/components/ui/checkbox-list';
+import FilterSection from './FilterSection';
 
 type BrandSectionProps = {
   data: FilterData[];

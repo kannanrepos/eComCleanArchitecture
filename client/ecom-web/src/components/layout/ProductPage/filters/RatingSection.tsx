@@ -1,4 +1,4 @@
-import CheckboxList, { FilterData } from '../../../ui/checkbox-list';
+import CheckboxList, { FilterData } from '@/components/ui/checkbox-list';
 import FilterSection from './FilterSection';
 
 type RatingSectionProps = {

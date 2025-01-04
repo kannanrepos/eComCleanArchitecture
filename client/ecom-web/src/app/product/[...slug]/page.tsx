@@ -24,7 +24,7 @@ const ProductDetailPage = ({ params }: { params: { slug: string[] } }) => {
   }
   return (
     <main>
-      <div className="container mx-auto my-3 p-6 xl:p-4 bg-primary-foreground">
+      <div className="lg:container mx-auto my-3 p-6 xl:p-4 bg-primary-foreground">
         {/* <BreadcrumbSec data={breadcrumbData} /> */}
         <section className="mb-11">
           <Header data={productData} />
