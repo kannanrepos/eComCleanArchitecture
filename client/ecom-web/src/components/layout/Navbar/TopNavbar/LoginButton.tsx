@@ -1,3 +1,6 @@
+import React from 'react';
+import { UserIcon } from 'lucide-react';
+
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -6,7 +9,6 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
-import { UserCircle, UserIcon } from 'lucide-react';
 import {
   Card,
   CardContent,
@@ -14,11 +16,17 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Button } from '../../../ui/button';
-import Link from 'next/link';
-import Image from 'next/image';
-import { cn } from '../../../../lib/utils';
-import React from 'react';
+import { Button } from '@/components/ui/button';
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
+
+import { cn } from '@/lib/utils';
+
+import SignInSection from './SignIn';
+import SignUpSection from './SignUp';
 
 const LoginButton = () => {
   return (
@@ -39,9 +47,16 @@ const LoginButton = () => {
                     <span className="text-sm font-parkinsansCF">
                       New Customer?
                     </span>
-                    <Button variant={'link'} className="font-parkinsansCF">
-                      Sign Up
-                    </Button>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button variant={'link'} className="font-parkinsansCF">
+                          Sign Up
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent className="bg-transparent">
+                        <SignUpSection />
+                      </AlertDialogContent>
+                    </AlertDialog>
                   </div>
                 </CardTitle>
 
@@ -50,59 +65,18 @@ const LoginButton = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Button className="w-full">Sign In</Button>
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button className="w-full">Sign In</Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent className="bg-transparent border-none">
+                    <SignInSection />
+                  </AlertDialogContent>
+                </AlertDialog>
               </CardContent>
             </Card>
           </NavigationMenuContent>
         </NavigationMenuItem>
-        {/* <NavigationMenuItem>
-          <NavigationMenuTrigger>
-            <div className="flex gap-3">
-              <UserCircle className="w-5 h-5 min-w-5 min-h-5 text-black/40" />
-              <p>Profile</p>
-            </div>
-          </NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-              <li className="row-span-3">
-                <NavigationMenuLink asChild>
-                  <Link
-                    href="/profile"
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                  >
-                    <div className="mb-2 mt-4 text-lg font-medium items-center justify-center flex flex-col">
-                      <Image
-                        src={'/images/blank-profile-picture.png'}
-                        alt="profile"
-                        width={100}
-                        height={100}
-                      />
-
-                      <div className="mb-2 mt-4 text-lg font-medium">
-                        Kannan S
-                      </div>
-                      <p className="text-sm leading-tight text-muted-foreground">
-                        101, My Address Line1, My Address Line2, My City, My
-                        State, My Country, 123456
-                      </p>
-                    </div>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-              <ListItem href="/orders" title="My Orders">
-                Here you can see your orders and their status and you can also
-                cancel them if you want to.
-              </ListItem>
-              <ListItem href="/settings" title="Settings">
-                Here you can set your profile information like delivery address,
-                password, aontact number an so on.
-              </ListItem>
-              <ListItem href="/faq" title="Query">
-                In this section you can ask your queries to us.
-              </ListItem>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem> */}
       </NavigationMenuList>
     </NavigationMenu>
   );

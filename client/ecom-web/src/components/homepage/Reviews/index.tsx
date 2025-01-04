@@ -1,7 +1,10 @@
 'use client';
 
-import React from 'react';
+import { useEffect, useState } from 'react';
 import * as motion from 'framer-motion/client';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { useIsClient, useMediaQuery } from 'usehooks-ts';
+
 import { cn } from '@/lib/utils';
 import {
   Carousel,
@@ -11,22 +14,20 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from '@/components/ui/carousel';
-import { useIsClient, useMediaQuery } from 'usehooks-ts';
 import { Review } from '@/types/review.types';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { parkinsansCF } from '../../../styles/fonts';
-import ReviewCard from '../../common/ReviewCard';
+import ReviewCard from '@/components/common/ReviewCard';
+import HeaderTag from '@/components/common/HeaderTag';
 
 type ReviewsProps = { data: Review[] };
 
 const Reviews = ({ data }: ReviewsProps) => {
-  const [api, setApi] = React.useState<CarouselApi>();
-  const [current, setCurrent] = React.useState(0);
-  const [count, setCount] = React.useState(0);
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const isClient = useIsClient();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!api) {
       return;
     }
@@ -58,18 +59,7 @@ const Reviews = ({ data }: ReviewsProps) => {
           className="relative w-full mb-6 md:mb-9"
         >
           <div className="relative flex items-end sm:items-center max-w-frame mx-auto mb-6 md:mb-10 px-4 xl:px-0">
-            <motion.h2
-              initial={{ y: '100px', opacity: 0 }}
-              whileInView={{ y: '0', opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className={cn([
-                parkinsansCF.className,
-                'text-[32px] leading-[36px] md:text-5xl capitalize mr-auto',
-              ])}
-            >
-              OUR HAPPY CUSTOMERS
-            </motion.h2>
+            <HeaderTag title="OUR HAPPY CUSTOMERS" />
             <div className="flex items-center space-x-1 ml-2">
               <CarouselPrevious variant="ghost" className="text-2xl">
                 <ArrowLeft />

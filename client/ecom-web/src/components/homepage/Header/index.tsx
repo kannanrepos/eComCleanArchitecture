@@ -1,9 +1,11 @@
-import * as motion from 'framer-motion/client';
-import AnimatedHeader from '@/components/animated/AnimatedHeader';
-import AnipatedParagraph from '../../animated/AnipatedParagraph';
 import Link from 'next/link';
-import CustomerHighlights from './CustomerHighlights';
 import Image from 'next/image';
+import * as motion from 'framer-motion/client';
+
+import AnimatedHeader from '@/components/animated/AnimatedHeader';
+import AnipatedParagraph from '@/components/animated/AnipatedParagraph';
+
+import CustomerHighlights from './CustomerHighlights';
 
 const Header = () => {
   return (

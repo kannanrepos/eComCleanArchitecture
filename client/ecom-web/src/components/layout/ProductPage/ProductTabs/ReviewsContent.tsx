@@ -1,15 +1,15 @@
 'use client';
-import { Button } from '../../../ui/button';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../../../ui/select';
-import Link from 'next/link';
-import ReviewCard from '../../../common/ReviewCard';
-import { reviewsData } from '../../../../lib/utils';
+} from '@/components/ui/select';
+import ReviewCard from '@/components/common/ReviewCard';
+import { reviewsData } from '@/lib/utils';
 
 const ReviewsContent = () => {
   return (

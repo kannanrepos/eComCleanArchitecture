@@ -1,4 +1,5 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
 import FaqContent from './FaqContent';
 import ProductDetailsContent from './ProductDetailsContent';
 import ReviewsContent from './ReviewsContent';
@@ -9,11 +10,11 @@ type TabBtn = {
 const tabBtnData: TabBtn[] = [
   {
     id: 1,
-    label: 'Product Details',
+    label: 'Details',
   },
   {
     id: 2,
-    label: 'Rating & Reviews',
+    label: 'Reviews',
   },
   {
     id: 3,
@@ -25,7 +26,7 @@ const ProductTabs = () => {
     <div>
       <div className="flex items-center mb-6 sm:mb-8 overflow-x-auto">
         <Tabs
-          defaultValue="Product Details"
+          defaultValue={tabBtnData[0].label}
           className="w-full bg-primary-foreground"
         >
           <TabsList className="grid w-full grid-cols-3 bg-primary-foreground">

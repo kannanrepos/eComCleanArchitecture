@@ -1,7 +1,8 @@
 'use client';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import { useState } from 'react';
+import Link from 'next/link';
+
+import { Button } from '@/components/ui/button';
 
 const TopBanner = () => {
   const [showAlert, setShowAlert] = useState(true);

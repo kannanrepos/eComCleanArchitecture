@@ -1,8 +1,9 @@
 'usee client';
 import React, { useState } from 'react';
-import { Button } from '../ui/button';
-import { cn } from '../../lib/utils';
 import { MinusIcon, PlusIcon } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 type ItemCounterProps = {
   isZeroDelete?: boolean;
   onAdd?: (value: number) => void;
@@ -38,7 +39,7 @@ const ItemCounter = ({
   return (
     <div
       className={cn(
-        'bg-primary/10 w-full min-w-[110px] max-w-[110px] sm:max-w-[170px] py-3 md:py-3.5 px-4 sm:px-5 rounded-full flex items-center justify-between',
+        'bg-primary/10 w-full min-w-[100px] max-w-[100px] sm:max-w-[150px] py-2 md:py-2.5 px-3 sm:px-4  flex items-center justify-between',
         className
       )}
     >
@@ -46,7 +47,7 @@ const ItemCounter = ({
         variant="ghost"
         size="icon"
         type="button"
-        className="h-5 w-5 sm:h-6 sm:w-6 text-xl hover:bg-transparent"
+        className="h-3 w-3 text-xl hover:bg-transparent"
         onClick={() => remove()}
       >
         <MinusIcon />
@@ -58,7 +59,7 @@ const ItemCounter = ({
         variant="ghost"
         size="icon"
         type="button"
-        className="h-5 w-5 sm:h-6 sm:w-6 text-xl hover:bg-transparent"
+        className="h-3 w-3 text-xl hover:bg-transparent"
         onClick={() => addToCart()}
       >
         <PlusIcon />

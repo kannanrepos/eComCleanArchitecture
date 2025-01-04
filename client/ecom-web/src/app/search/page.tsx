@@ -1,36 +1,25 @@
 'use client';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { FilterIcon } from 'lucide-react';
 
 import BreadcrumbSec from '@/components/common/BreadcrumbSec';
-import { BredcumProp } from '@/types/breadcrumb.type';
-import { useEffect, useState } from 'react';
-import { FilterIcon } from 'lucide-react';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../../components/ui/select';
-import ProductCard from '../../components/common/ProductCard';
+} from '@/components/ui/select';
+import ProductCard from '@/components/common/ProductCard';
 import {
   newArrivalsData,
   relatedProductData,
   topSellingData,
-} from '../../lib/utils';
-import Filters from '../../components/layout/ProductPage/filters';
+} from '@/lib/utils';
+import Filters from '@/components/layout/ProductPage/filters';
+import { SearchPageBreadCrumbData } from '@/lib/data';
 
-const breadCrumbData: BredcumProp[] = [
-  {
-    id: 1,
-    title: 'Home',
-    url: '/',
-  },
-  {
-    id: 2,
-    title: 'Search',
-  },
-];
 const SearchPage = () => {
   const searchParams = useSearchParams();
   const [searchText, setSearchText] = useState('');
@@ -51,7 +40,7 @@ const SearchPage = () => {
             <Filters />
           </div>
           <div className="flex flex-col w-full bg-primary-foreground rounded-sm px-5 md:px-6 py-5 space-y-5 md:space-y-6">
-            <BreadcrumbSec data={breadCrumbData} />
+            <BreadcrumbSec data={SearchPageBreadCrumbData} />
             <div className="flex flex-col lg:flex-row lg:justify-between">
               <div className="flex items-center justify-between">
                 <h1 className="font-bold text-2xl md:text-[32px]">

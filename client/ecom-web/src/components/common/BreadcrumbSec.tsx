@@ -1,4 +1,6 @@
+import { Fragment } from 'react';
 import Link from 'next/link';
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -6,9 +8,8 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from '../ui/breadcrumb';
+} from '@/components/ui/breadcrumb';
 import { BredcumProp } from '@/types/breadcrumb.type';
-import { Fragment } from 'react';
 type BreadcrumbSecProp = {
   data: BredcumProp[];
 };

@@ -6,6 +6,7 @@ export type Discount = {
 export type Product = {
   id: number;
   title: string;
+  shortDescription?: string;
   srcUrl: string;
   gallery?: string[];
   price: number;

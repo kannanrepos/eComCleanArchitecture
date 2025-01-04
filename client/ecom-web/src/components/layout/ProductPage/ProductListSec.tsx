@@ -1,4 +1,4 @@
-import { Product } from '../../../types/product.types';
+import { Product } from '@/types/product.types';
 
 type ProductListSecProps = {
   title: string;

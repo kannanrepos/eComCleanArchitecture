@@ -1,16 +1,13 @@
-import React from 'react';
+import { notFound } from 'next/navigation';
 import {
   newArrivalsData,
   relatedProductData,
   topSellingData,
-} from '../../../lib/utils';
-import { Product } from '../../../types/product.types';
-import { notFound } from 'next/navigation';
-import BreadcrumbSec from '../../../components/common/BreadcrumbSec';
-import { BredcumProp } from '../../../types/breadcrumb.type';
-import Header from '../../../components/layout/ProductPage/Header';
-import ProductListSec from '../../../components/layout/ProductPage/ProductListSec';
-import ProductTabs from '../../../components/layout/ProductPage/ProductTabs';
+} from '@/lib/utils';
+import { Product } from '@/types/product.types';
+import Header from '@/components/layout/ProductPage/Header';
+import ProductTabs from '@/components/layout/ProductPage/ProductTabs';
+import ProductListSec from '@/components/layout/ProductPage/ProductListSec';
 const data: Product[] = [
   ...newArrivalsData,
   ...topSellingData,

@@ -1,221 +1,28 @@
 import React from 'react';
+import { Button } from '@/components/ui/button';
+import BreadcrumbSec from '@/components/common/BreadcrumbSec';
+import { Separator } from '@/components/ui/separator';
+
+import { CartDataItem, CartItemBreadCrumbData } from '@/lib/data';
+import CartItem from './CartItem';
 
 const CartItemSection = () => {
   return (
-    <div className="flex flex-col gap-2">
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
+    <div className="bg-primary-foreground flex-col w-full">
+      <div className="p-2 mx-5">
+        <BreadcrumbSec data={CartItemBreadCrumbData} />
       </div>
-
-      <div>Hello</div>
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
+      <Separator />
+      <div className="w-full p-3.5 md:px-6  space-y-4 md:space-y-6 ">
+        {CartDataItem?.map((product, idx, arr) => (
+          <React.Fragment key={idx}>
+            <CartItem data={product} />
+            {arr.length - 1 !== idx && <hr className="border-t-black/10" />}
+          </React.Fragment>
+        ))}
       </div>
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
-      </div>
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
-      </div>
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
-      </div>
-
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
-      </div>
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
-      </div>
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
-      </div>
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
-      </div>
-
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
-      </div>
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
-      </div>
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
-      </div>
-      <div className="sticky bottom-0 p-5 w-full bg-primary text-primary-foreground">
-        Stickey
-      </div>
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
-      </div>
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
-      </div>
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
-      </div>
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
-      </div>
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
-      </div>
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
-      </div>
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
-      </div>
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
-      </div>
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
-      </div>
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
-      </div>
-      <div className="gird grid-cols-4 space-x-2">
-        <div className="col-span-1">
-          <div>Image</div>
-        </div>
-        <div className="col-span-2">
-          <div>Product Details</div>
-        </div>
-        <div className="col-span-1">Delivered By</div>
+      <div className="flex justify-end border p-4 sticky bottom-0 w-full bg-primary-foreground shadow-md">
+        <Button className="capitalize">Place Order</Button>
       </div>
     </div>
   );

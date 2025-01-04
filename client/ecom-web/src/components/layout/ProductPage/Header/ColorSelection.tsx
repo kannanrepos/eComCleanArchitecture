@@ -1,20 +1,8 @@
 import React, { useState } from 'react';
-import { Color } from '../../../../lib/features/products/productsSlice';
 import { CheckCircle } from 'lucide-react';
-const colorsData: Color[] = [
-  {
-    name: 'Brown',
-    code: 'bg-[#4F4631]',
-  },
-  {
-    name: 'Green',
-    code: 'bg-[#314F4A]',
-  },
-  {
-    name: 'Blue',
-    code: 'bg-[#31344F]',
-  },
-];
+
+import { colorsData } from '@/lib/data';
+
 const ColorSelection = () => {
   const [selectedColor, setSelectedColor] = useState('');
   return (

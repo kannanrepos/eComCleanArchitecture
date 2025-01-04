@@ -1,3 +1,8 @@
+import React from 'react';
+import Link from 'next/link';
+import { MenuIcon } from 'lucide-react';
+import { AccordionItem, AccordionTrigger } from '@radix-ui/react-accordion';
+import { NavMenu } from '@/types/navbar.types';
 import {
   Sheet,
   SheetClose,
@@ -6,13 +11,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { NavMenu } from '../navbar.types';
 import { Button } from '@/components/ui/button';
-import { MenuIcon } from 'lucide-react';
-import Link from 'next/link';
-import React from 'react';
-import { Accordion, AccordionContent } from '../../../ui/accordion';
-import { AccordionItem, AccordionTrigger } from '@radix-ui/react-accordion';
+import { Accordion, AccordionContent } from '@/components/ui/accordion';
 import LogoLink from './LogoLink';
 
 type Props = {

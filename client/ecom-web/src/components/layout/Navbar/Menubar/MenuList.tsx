@@ -5,7 +5,7 @@ import {
   NavigationMenuLink,
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
-import { MenuListData } from '../navbar.types';
+import { MenuListData } from '../../../../types/navbar.types';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
@@ -34,7 +34,7 @@ const MenuList = ({ data, label }: MenuListProps) => {
 
 export default MenuList;
 const ListItem = React.forwardRef<
-  React.ElementRef<typeof Link>,
+  React.ComponentRef<typeof Link>,
   React.ComponentPropsWithoutRef<typeof Link>
 >(({ className, title, children, ...props }, ref) => {
   return (

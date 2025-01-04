@@ -1,9 +1,10 @@
 import React from 'react';
-import { NavMenu } from '../navbar.types';
+import { NavMenu } from '../../../../types/navbar.types';
 import {
   NavigationMenu,
   NavigationMenuList,
 } from '@/components/ui/navigation-menu';
+
 import MenuItem from './MenuItem';
 import MenuList from './MenuList';
 type MenubarProps = {

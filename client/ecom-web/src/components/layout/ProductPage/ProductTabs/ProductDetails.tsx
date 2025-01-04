@@ -1,27 +1,5 @@
-import React from 'react';
-export type SpecItem = {
-  label: string;
-  value: string;
-};
+import { specsData } from '@/lib/data';
 
-const specsData: SpecItem[] = [
-  {
-    label: ' Material composition',
-    value: '100% Cotton',
-  },
-  {
-    label: 'Care instructions',
-    value: 'Machine wash warm, tumble dry',
-  },
-  {
-    label: 'Fit type',
-    value: 'Classic Fit',
-  },
-  {
-    label: 'Pattern',
-    value: 'Solid',
-  },
-];
 const ProductDetails = () => {
   return (
     <>
