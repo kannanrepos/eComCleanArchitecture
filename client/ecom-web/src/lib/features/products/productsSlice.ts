@@ -1,39 +1,30 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-export type Color = {
-  name: string;
-  code: string;
-};
+import { IProduct } from '@/types/productInfo.type';
 
 // Define a type for the slice state
-interface ProductsState {
-  colorSelection: Color;
-  sizeSelection: string;
-}
-
+type ProductsState = {
+  products: IProduct[] | null;
+  status: string;
+};
 // Define the initial state using that type
 const initialState: ProductsState = {
-  colorSelection: {
-    name: 'Brown',
-    code: 'bg-[#4F4631]',
-  },
-  sizeSelection: 'Large',
+  products: [],
+  status: 'idle',
 };
-
 export const productsSlice = createSlice({
   name: 'products',
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    setColorSelection: (state, action: PayloadAction<Color>) => {
-      state.colorSelection = action.payload;
-    },
-    setSizeSelection: (state, action: PayloadAction<string>) => {
-      state.sizeSelection = action.payload;
+    setProducts: (state, action: PayloadAction<IProduct[]>) => {
+      state.status = 'loading';
+      state.products = action.payload;
+      state.status = 'succeeded';
     },
   },
 });
 
-export const { setColorSelection, setSizeSelection } = productsSlice.actions;
+export const { setProducts } = productsSlice.actions;
 
 export default productsSlice.reducer;

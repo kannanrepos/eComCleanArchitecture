@@ -1,11 +1,11 @@
 import { FilterData } from '@/components/ui/checkbox-list';
 import { Product } from '../types/product.types';
-import { Color } from './features/products/productsSlice';
 import { BredcumProp } from '../types/breadcrumb.type';
 import { FaqItem } from '../types/FaqItem.types';
 import { SpecItem } from '../types/SpecItem.type';
 import { Address } from '../types/address.type';
 import { NavMenu } from '../types/navbar.types';
+import { Color } from '../types/color.type';
 
 export const NavMenuItemsData: NavMenu = [
   {
