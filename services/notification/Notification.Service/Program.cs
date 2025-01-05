@@ -1,41 +1,35 @@
+using System.Reflection;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Notification.Service.Contracts;
+using Notification.Service.Extensions;
+using Notification.Service.Hubs;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services
+       .AddOpenApi()
+       .AddPresentation(builder.Configuration)
+       .AddEndpoints(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+       app.MapOpenApi();
+       app.UseSwaggerUI(option =>
+       {
+              option.SwaggerEndpoint("/openapi/v1.json", "Notification Service");
+       });
+       // app.ApplyMigrations();
 }
-
-app.UseHttpsRedirection();
-
-var summaries = new[]
+app.MapHealthChecks("health", new HealthCheckOptions
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+       ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
+app.MapEndpoints();
+app.UseCors(Constants.CORS_POLICY_NAME);
+app.MapHub<NotificationHub>("/notificationHub");
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+await app.RunAsync();
 
-app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
