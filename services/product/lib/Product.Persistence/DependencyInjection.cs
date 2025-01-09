@@ -1,7 +1,13 @@
 
 
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Product.Application.Abstractions.Data;
+using Product.Domain.Repositories;
+using Product.Persistence.Data;
+using Product.Persistence.Repositories;
 
 namespace Product.Persistence;
 

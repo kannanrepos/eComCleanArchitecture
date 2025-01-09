@@ -15,6 +15,9 @@ builder.Services.AddRateLimiter(options =>
 });
 builder.Services.AddReverseProxy()
     .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
+// Add other necessary services like SignalR
+builder.Services.AddSignalR();
+
 var app = builder.Build();
 app.UseRateLimiter();
 app.MapReverseProxy();
