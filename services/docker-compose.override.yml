@@ -1,50 +1,50 @@
 services:
-  # seq:
-  #   networks:
-  #     - default
-  #   environment:
-  #     - ACCEPT_EULA=Y
-  #   ports:
-  #     - "81:80"
-  #     - "5342:5341"
-  #   volumes:
-  #     - seq-logs:/data
-  #   restart: unless-stopped
-  # postgres_primary:
-  #   networks:
-  #     - default
-  #   environment:
-  #     POSTGRES_USER: postgres
-  #     POSTGRES_PASSWORD: P@55w0rd!
-  #     POSTGRES_DB: postgres
-  #   ports:
-  #     - '5432:5432'
-  # postgres_replica:
-  #   networks:
-  #     - default
-  #   environment:
-  #     POSTGRES_USER: postgres
-  #     POSTGRES_PASSWORD: P@55w0rd!
-  #     POSTGRES_DB: postgres
-  #   ports:
-  #     - '5433:5432'
-  #   depends_on:
-  #     - postgres_primary
-  #   command: >
-  #     postgres -c max_wal_senders=3
-  #              -c wal_level=hot_standby
-  #              -c hot_standby=on
-  #              -c primary_conninfo='host=postgres_primary user=user password=P@55w0rd! port=5432'
-  #              -c restore_command='cp /var/lib/postgresql/data/archive/%f %p'
-  #              -c archive_mode=on
-  #              -c archive_command='test ! -f /var/lib/postgresql/data/archive/%f && cp %p /var/lib/postgresql/data/archive/%f'
-  # redis_cache:
-  #   networks:
-  #     - default
-  #   ports:
-  #     - "6379:6379"
-  #   volumes:
-  #     - redis_data:/data
+  seq:
+    networks:
+      - default
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - "85:80"
+      - "5342:5341"
+    volumes:
+      - seq-logs:/data
+    restart: unless-stopped
+  postgres_primary:
+    networks:
+      - default
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: P@55w0rd!
+      POSTGRES_DB: postgres
+    ports:
+      - '5435:5432'
+  postgres_replica:
+    networks:
+      - default
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: P@55w0rd!
+      POSTGRES_DB: postgres
+    ports:
+      - '5436:5432'
+    depends_on:
+      - postgres_primary
+    command: >
+      postgres -c max_wal_senders=3
+               -c wal_level=hot_standby
+               -c hot_standby=on
+               -c primary_conninfo='host=postgres_primary user=user password=P@55w0rd! port=5432'
+               -c restore_command='cp /var/lib/postgresql/data/archive/%f %p'
+               -c archive_mode=on
+               -c archive_command='test ! -f /var/lib/postgresql/data/archive/%f && cp %p /var/lib/postgresql/data/archive/%f'
+  redis_cache:
+    networks:
+      - default
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
 
 
   gateway_service:
@@ -54,7 +54,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
     ports:
-      - "8080"
+      - 5000:8080
 
   product_service:
     networks:
@@ -63,7 +63,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8081
     ports:
-      - "8081"
+      - 5001:8081
 
 
   notification_service:
@@ -73,7 +73,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8089
     ports:
-      - "8089"
+      - 5009:8089
 
 
 volumes:

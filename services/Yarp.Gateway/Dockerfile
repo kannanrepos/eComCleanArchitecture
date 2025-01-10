@@ -6,20 +6,23 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y \
     clang \
     zlib1g-dev
-
+WORKDIR /src
 COPY ["Yarp.Gateway/Yarp.Gateway.csproj", "Yarp.Gateway/"]
-RUN dotnet restore "Yarp.Gateway/Yarp.Gateway.csproj"
+RUN dotnet restore "./Yarp.Gateway/Yarp.Gateway.csproj"
 
 COPY . .
-RUN dotnet build "Yarp.Gateway/Yarp.Gateway.csproj" -c Release -o /app/service/gateway/build
 
+WORKDIR /src/Yarp.Gateway
 # Stage 2: Publish Stage
 FROM build AS publish
-RUN dotnet publish "Yarp.Gateway/Yarp.Gateway.csproj" -c Release -o /app/service/gateway/publish
+RUN dotnet publish "./Yarp.Gateway.csproj" \
+    -c Release \
+    -o /app/publish \
+    /p:UseAppHost=false
 
 # Stage 3: Runtime Stage
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
-WORKDIR /app/service/gateway/
+WORKDIR /app
 EXPOSE 8080
-COPY --from=publish /app/service/gateway/publish .
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Yarp.Gateway.dll"]

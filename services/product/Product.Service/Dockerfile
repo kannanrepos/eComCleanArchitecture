@@ -1,7 +1,8 @@
 # Stage 1: Build Stage
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
-WORKDIR /src
+WORKDIR /app
 
+WORKDIR /src
 # Copy project files first for better layer caching
 COPY ["product/Product.Service/Product.Service.csproj", "product/Product.Service/"]
 COPY ["product/lib/Product.Application/Product.Application.csproj", "product/lib/Product.Application/"]
@@ -11,13 +12,13 @@ COPY ["product/lib/Product.Persistence/Product.Persistence.csproj", "product/lib
 COPY ["shared/Ecom.Shared/Ecom.Shared.csproj", "shared/Ecom.Shared/"]
 
 # Restore packages
-RUN dotnet restore "product/Product.Service/Product.Service.csproj"
+RUN dotnet restore "./product/Product.Service/Product.Service.csproj"
 
 # Copy the rest of the source code
 COPY . .
-
+WORKDIR /src/product/Product.Service
 # Build and publish
-RUN dotnet publish "product/Product.Service/Product.Service.csproj" \
+RUN dotnet publish "./Product.Service.csproj" \
     -c Release \
     -o /app/publish \
     /p:UseAppHost=false

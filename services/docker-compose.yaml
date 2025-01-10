@@ -8,16 +8,16 @@ x-postgres-common: &postgres-common
     timeout: 5s
     retries: 5
 services:
-  # seq:
-  #   image: datalust/seq:latest
-  #   container_name: seq
-  #   restart: unless-stopped
-  # postgres_primary:
-  #   <<: *postgres-common
-  #   container_name: postgres_primary
-  # postgres_replica:
-  #   <<: *postgres-common
-  #   container_name: postgres_replica
+  seq:
+    image: datalust/seq:latest
+    container_name: seq
+    restart: unless-stopped
+  postgres_primary:
+    <<: *postgres-common
+    container_name: postgres_primary
+  postgres_replica:
+    <<: *postgres-common
+    container_name: postgres_replica
   redis_cache:
     image: redis:alpine
     container_name: "redis_cache"
@@ -29,8 +29,7 @@ services:
     build:
       context: .
       dockerfile: Yarp.Gateway/Dockerfile
-    ports:
-      - 5000:8080
+
 
   product_service:
     image: ${DOCKER_REGISTRY-}service
@@ -38,13 +37,11 @@ services:
     build:
       context: .
       dockerfile: product/Product.Service/Dockerfile
-    ports:
-      - 5001:8081
+
   notification_service:
     image: ${DOCKER_REGISTRY-}service
     container_name: notification_service
     build:
       context: .
       dockerfile: notification/Notification.Service/Dockerfile
-    ports:
-      - 5009:8089
+
